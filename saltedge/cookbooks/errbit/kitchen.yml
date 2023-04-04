@@ -1,0 +1,24 @@
+---
+driver:
+  name: vagrant
+  cache_directory: false
+
+provisioner:
+  name: chef_zero
+  log_level: error
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-20.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[errbit::default]
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:
